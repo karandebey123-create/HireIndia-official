@@ -1,21 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono&display=swap');
 
 :root {
-  --cream: #FAFAF5;
-  --cream2: #F2F1EB;
-  --navy: #0A1628;
-  --saffron: #FF6B35;
-  --saffron-light: #FFF0EB;
+  --cream: #FDF7EE;
+  --cream2: #F5EAD8;
+  --navy: #2C1A0E;
+  --saffron: #C8441C;
+  --saffron-light: #FBEADC;
   --green: #138808;
   --green-light: #E8F5E9;
   --blue: #1a56db;
   --blue-light: #EBF2FF;
-  --gray: #6B7280;
-  --gray-light: #F3F4F6;
-  --border: #E5E3DB;
-  --text: #1a1a1a;
+  --gray: #7C6B5D;
+  --gray-light: #F2E8DC;
+  --border: #E8D5BF;
+  --text: #2C1A0E;
   --card: #FFFFFF;
-  --shadow: rgba(10,22,40,0.08);
+  --shadow: rgba(44,26,14,0.10);
   --red: #DC2626;
   --red-light: #FEE2E2;
 }
@@ -122,7 +122,7 @@ footer { background: var(--navy); color: rgba(255,255,255,0.6); padding: 3rem 5%
 .step.active { background: var(--saffron); color: white; }
 .step-num { font-size: 1.1rem; display: block; margin-bottom: 0.2rem; }
 
-.cutoff-box { background: linear-gradient(135deg,var(--navy),#152238); border-radius: 10px; padding: 1rem; }
+.cutoff-box { background: linear-gradient(135deg,var(--navy),#3D2515); border-radius: 10px; padding: 1rem; }
 .cutoff-title { color: var(--saffron); font-size: 0.72rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 0.8rem; }
 .cutoff-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 0.6rem; }
 .cutoff-item { text-align: center; }
@@ -146,7 +146,7 @@ footer { background: var(--navy); color: rgba(255,255,255,0.6); padding: 3rem 5%
 .apply-box h3 { font-family: 'Playfair Display',serif; color: white; font-size: 1.1rem; margin-bottom: 0.5rem; }
 .apply-box p { color: rgba(255,255,255,0.6); font-size: 0.82rem; margin-bottom: 1.2rem; }
 .btn-apply { display: inline-block; background: var(--saffron); color: white; border: none; padding: 0.85rem 2rem; border-radius: 10px; font-family: 'DM Sans',sans-serif; font-weight: 700; font-size: 0.9rem; cursor: pointer; transition: all .2s; text-decoration: none; }
-.btn-apply:hover { background: #e55a27; transform: translateY(-2px); }
+.btn-apply:hover { background: #a8360f; transform: translateY(-2px); }
 
 .related-jobs { margin-top: 2rem; }
 .related-title { font-family: 'Playfair Display',serif; font-size: 1.3rem; font-weight: 800; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
