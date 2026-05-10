@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html data-theme="light" lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LKHYPHGVPD"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-LKHYPHGVPD");</script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>HireIndia — Government &amp; Private Jobs in India 2026 | Latest Sarkari Naukri</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono&display=swap" rel="stylesheet"/>
+<link href="https://hireindiaofficial.netlify.app/" rel="canonical"/>
+<meta content="Find latest government and private jobs in India 2026. Get Sarkari Naukri updates, admit cards, results, and recruitment notifications daily on HireIndia." name="description"/>
+<meta content="government jobs, Sarkari Naukri, India jobs, private jobs, admit card, results, recruitment 2026" name="keywords"/>
+<meta content="index, follow" name="robots"/>
+<meta content="HireIndia — Government &amp; Private Jobs in India 2026" property="og:title"/>
+<meta content="Find latest government and private jobs in India 2026." property="og:description"/>
+<meta content="website" property="og:type"/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"HireIndia","url":"https://hireindiaofficial.netlify.app/","description":"India most detailed government job discovery platform."}</script>
+</head>
+<body>
+<!-- All content injected by JS from jobs.json -->
+<div id="app"></div>
+<div class="toast" id="toast-el"></div>
+<div class="overlay" id="overlay" onclick="toggleFavPanel()"></div>
+<div class="fav-panel" id="fav-panel">
+  <div class="fav-panel-header"><div class="fav-panel-title">❤️ Saved Jobs</div><button class="fav-close" onclick="toggleFavPanel()">✕</button></div>
+  <div class="fav-list" id="fav-list"></div>
+</div>
+<script>
+// ─── LOAD DATA AND RENDER ───
+fetch("jobs.json").then(r=>r.json()).then(data=>{
+  document.getElementById("app").innerHTML = buildPage(data);
+  initAll(data);
+}).catch(()=>{
+  document.getElementById("app").innerHTML = "<p style=padding:2rem>Could not load jobs.json</p>";
+});
+
+function buildPage(d){
+  return buildStyles() + buildNavbar() + buildTicker(d.ticker) + buildHero() + buildCats() + buildFilterBar() +
+    buildMain(d) + buildQualSection() + buildStateSection() + buildKnowledge() + buildFooter() + buildBottomNav() + buildWaFloat();
+}
+
+function buildStyles(){
+  return `<style>
+:root{
+  --cream:#FDF7EE;--cream2:#F5EAD8;
+  --navy:#2C1A0E;--navy2:#3D2515;
+  --saffron:#C8441C;--saffron-light:#FBEADC;
+  --green:#138808;--green-light:#E8F5E9;
+  --blue:#1a56db;--blue-light:#EBF2FF;
+  --gray:#7C6B5D;--gray-light:#F2E8DC;
+  --border:#E8D5BF;--text:#2C1A0E;
+  --card:#FFFFFF;--shadow:rgba(44,26,14,0.10);
+  --red:#DC2626;--red-light:#FEE2E2;
+}
+[data-theme="dark"]{
+  --cream:#0D1117;--cream2:#161B22;--navy:#0A1628;--navy2:#152238;
+  --text:#E6EDF3;--card:#1C2333;--border:#30363D;--gray:#9CA3AF;
+  --gray-light:#21262D;--shadow:rgba(0,0,0,0.4);--saffron-light:#2D1008;
+  --green-light:#0D2818;--blue-light:#0D1F3C;--red-light:#2D1010;
+}
+[data-theme="dark"] .state-section{background:#0A0F1E;}
+[data-theme="dark"] .knowledge-section{background:#161B22;}
+[data-theme="dark"] .know-card,[data-theme="dark"] .featured-card,[data-theme="dark"] .sidebar-card,[data-theme="dark"] .qual-card{background:#1C2333;border-color:#30363D;}
+[data-theme="dark"] .know-card-title,[data-theme="dark"] .card-title,[data-theme="dark"] .quick-job-title,[data-theme="dark"] .cal-exam,[data-theme="dark"] .sec-title{color:#E6EDF3!important;}
+[data-theme="dark"] .know-card-sub,[data-theme="dark"] .card-org,[data-theme="dark"] .quick-job-meta,[data-theme="dark"] .cal-type,[data-theme="dark"] .fact-label,[data-theme="dark"] .qual-count{color:#9CA3AF!important;}
+[data-theme="dark"] .fact{background:#21262D;}
+[data-theme="dark"] .fact-value{color:#E6EDF3!important;}
+[data-theme="dark"] .filter-bar{background:#161B22;border-color:#30363D;}
+[data-theme="dark"] .chip{background:#21262D;border-color:#30363D;color:#9CA3AF;}
+[data-theme="dark"] .card-actions,[data-theme="dark"] .cal-item{border-color:#30363D;}
+[data-theme="dark"] .fav-item{background:#21262D;}
+[data-theme="dark"] .fav-item-title{color:#E6EDF3!important;}
+[data-theme="dark"] .fav-item-org{color:#9CA3AF!important;}
+[data-theme="dark"] footer{background:#0A0F1E;}
+[data-theme="dark"] .cat-card{background:#1C2333;border-color:#30363D;color:#E6EDF3;}
+[data-theme="dark"] .sec-head{border-color:#30363D;}
+[data-theme="dark"] .qual-name{color:#E6EDF3!important;}
+[data-theme="dark"] .mobile-menu{background:#0A1628;}
+[data-theme="dark"] .mobile-menu a{color:#E6EDF3;border-color:#30363D;}
+[data-theme="dark"] .bottom-nav{background:#0A1628;border-color:#1e2a3a;}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:"DM Sans",sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden;}
+.navbar{position:fixed;top:0;left:0;right:0;z-index:1000;background:var(--navy);padding:0 4%;height:56px;display:flex;align-items:center;justify-content:space-between;}
+.logo{font-family:"Playfair Display",serif;font-size:1.4rem;font-weight:900;color:white;letter-spacing:-0.5px;cursor:pointer;text-decoration:none;}
+.logo span{color:var(--saffron);}
+.nav-center{display:flex;gap:1.5rem;}
+.nav-link{color:rgba(255,255,255,0.7);font-size:0.8rem;font-weight:500;cursor:pointer;transition:color .2s;text-decoration:none;}
+.nav-link:hover{color:var(--saffron);}
+.nav-right{display:flex;align-items:center;gap:0.6rem;}
+.dark-btn{background:rgba(255,255,255,0.1);border:none;color:white;width:34px;height:34px;border-radius:8px;cursor:pointer;font-size:0.9rem;display:flex;align-items:center;justify-content:center;transition:all .2s;}
+.dark-btn:hover{background:rgba(255,255,255,0.2);}
+.fav-nav-btn{background:rgba(200,68,28,0.15);border:1px solid rgba(200,68,28,0.3);color:var(--saffron);padding:0.4rem 0.9rem;border-radius:6px;font-size:0.78rem;font-weight:600;cursor:pointer;transition:all .2s;}
+.fav-nav-btn:hover{background:var(--saffron);color:white;}
+.post-btn{background:var(--saffron);border:none;color:white;padding:0.45rem 1rem;border-radius:6px;font-family:"DM Sans",sans-serif;font-weight:600;font-size:0.8rem;cursor:pointer;transition:all .2s;}
+.post-btn:hover{background:#a8360f;}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px;border:none;background:rgba(255,255,255,0.1);border-radius:8px;}
+.hamburger span{width:22px;height:2px;background:white;border-radius:2px;transition:all .3s;}
+.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px);}
+.nav-right-mobile{display:none;align-items:center;gap:0.5rem;}
+.mobile-menu{position:fixed;top:56px;left:0;right:0;background:var(--navy);z-index:999;transform:translateY(-110%);transition:transform 0.3s cubic-bezier(0.4,0,0.2,1);box-shadow:0 8px 30px rgba(0,0,0,0.4);}
+.mobile-menu.open{transform:translateY(0);}
+.mobile-menu a{display:block;color:rgba(255,255,255,0.85);font-size:0.95rem;font-weight:500;padding:0.95rem 5%;border-bottom:1px solid rgba(255,255,255,0.08);cursor:pointer;text-decoration:none;transition:all .2s;}
+.mobile-menu a:hover{color:var(--saffron);padding-left:7%;}
+.mobile-menu-actions{display:flex;gap:0.6rem;padding:1rem 5%;}
+.mob-fav-btn{flex:1;padding:0.7rem;border-radius:8px;font-family:"DM Sans",sans-serif;font-weight:700;font-size:0.85rem;cursor:pointer;background:rgba(200,68,28,0.2);color:var(--saffron);border:1px solid rgba(200,68,28,0.3);}
+.mob-post-btn{flex:1;padding:0.7rem;border-radius:8px;font-family:"DM Sans",sans-serif;font-weight:700;font-size:0.85rem;cursor:pointer;background:var(--saffron);color:white;border:none;}
+.ticker-bar{background:var(--saffron);margin-top:56px;padding:0.45rem 0;overflow:hidden;}
+.ticker-inner{display:flex;align-items:center;padding:0 4%;}
+.ticker-label{background:var(--navy);color:white;font-size:0.68rem;font-weight:700;padding:0.18rem 0.7rem;letter-spacing:1px;white-space:nowrap;margin-right:1rem;border-radius:3px;}
+.ticker-scroll{overflow:hidden;flex:1;}
+.ticker-text{display:inline-block;animation:ticker 40s linear infinite;white-space:nowrap;}
+.ticker-text span{color:white;font-size:0.76rem;font-weight:500;margin-right:3rem;}
+.ticker-text span::before{content:"● ";}
+@keyframes ticker{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+.hero{background:var(--navy);padding:2rem 5% 1.8rem;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:"";position:absolute;inset:0;background-image:radial-gradient(circle,rgba(200,68,28,0.15) 1px,transparent 1px);background-size:28px 28px;opacity:0.6;}
+.hero-logo{font-family:"Playfair Display",serif;font-size:clamp(2.2rem,7vw,4rem);font-weight:900;color:white;position:relative;z-index:1;line-height:1;margin-bottom:0.35rem;letter-spacing:-2px;}
+.hero-logo span{color:var(--saffron);}
+.hero-tagline{font-size:0.68rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:0.9rem;position:relative;z-index:1;}
+.hero-sub{color:rgba(255,255,255,0.65);font-size:0.88rem;max-width:400px;margin:0 auto 1.2rem;line-height:1.5;position:relative;z-index:1;}
+.search-wrap{display:flex;gap:0.4rem;max-width:560px;margin:0 auto 1rem;background:white;border-radius:12px;padding:0.4rem;box-shadow:0 8px 40px rgba(0,0,0,0.35);position:relative;z-index:1;}
+.search-input{flex:1;border:none;outline:none;font-family:"DM Sans",sans-serif;font-size:0.88rem;color:var(--text);background:transparent;padding:0.3rem 0.5rem;}
+.search-wrap select{border:none;outline:none;font-family:"DM Sans",sans-serif;font-size:0.76rem;color:var(--gray);background:var(--gray-light);border-radius:8px;padding:0.3rem 0.5rem;cursor:pointer;}
+.search-btn{background:var(--saffron);color:white;border:none;padding:0.55rem 1rem;border-radius:8px;font-weight:700;font-size:0.82rem;cursor:pointer;transition:all .2s;white-space:nowrap;}
+.search-btn:active{transform:scale(0.95);}
+.hero-chips{display:flex;flex-wrap:wrap;justify-content:center;gap:0.35rem;position:relative;z-index:1;}
+.hero-chip{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.85);padding:0.28rem 0.75rem;border-radius:20px;font-size:0.7rem;font-weight:600;cursor:pointer;transition:all .2s;}
+.hero-chip:hover,.hero-chip:active{background:var(--saffron);border-color:var(--saffron);color:white;transform:scale(0.97);}
+.cat-section{background:var(--cream2);padding:1.2rem 4%;}
+.cat-section-inner{max-width:1200px;margin:0 auto;}
+.cat-section-title{font-family:"Playfair Display",serif;font-size:1rem;font-weight:800;color:var(--text);margin-bottom:0.8rem;display:flex;align-items:center;gap:0.5rem;}
+.cat-section-title::before{content:"";width:4px;height:16px;background:var(--saffron);border-radius:2px;display:inline-block;}
+.cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:0.55rem;}
+.cat-card{background:var(--card);border:1.5px solid var(--border);border-radius:12px;padding:0.75rem 0.5rem;text-align:center;cursor:pointer;font-size:0.76rem;font-weight:600;color:var(--text);user-select:none;transition:transform 0.18s ease,box-shadow 0.18s ease,border-color 0.18s ease,background 0.18s ease,color 0.18s ease;}
+.cat-card:hover{border-color:var(--saffron);background:var(--saffron-light);color:var(--saffron);transform:translateY(-3px);box-shadow:0 8px 20px var(--shadow);}
+.cat-card:active{transform:scale(0.93) translateY(0);box-shadow:none;background:var(--saffron);color:white;border-color:var(--saffron);}
+.cat-icon{font-size:1.35rem;display:block;margin-bottom:0.3rem;}
+.filter-bar{background:white;border-bottom:1px solid var(--border);padding:0.55rem 4%;display:flex;gap:0.4rem;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;position:sticky;top:56px;z-index:100;}
+.filter-bar::-webkit-scrollbar{display:none;}
+.chip{background:var(--gray-light);border:1.5px solid var(--border);color:var(--gray);padding:0.28rem 0.8rem;border-radius:20px;font-size:0.72rem;font-weight:600;cursor:pointer;white-space:nowrap;flex-shrink:0;user-select:none;transition:transform 0.15s ease,background 0.15s,border-color 0.15s,color 0.15s;}
+.chip:hover{border-color:var(--saffron);color:var(--saffron);}
+.chip:active{transform:scale(0.93);}
+.chip.active{background:var(--saffron);border-color:var(--saffron);color:white;}
+.main-wrap{display:grid;grid-template-columns:1fr 310px;gap:1.5rem;max-width:1200px;margin:0 auto;padding:1.4rem 4%;}
+.sec-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.1rem;padding-bottom:0.7rem;border-bottom:2px solid var(--border);}
+.sec-title{font-family:"Playfair Display",serif;font-size:1.2rem;font-weight:800;color:var(--text);display:flex;align-items:center;gap:0.5rem;}
+.sec-title::before{content:"";width:4px;height:18px;background:var(--saffron);border-radius:2px;display:inline-block;}
+.see-all{color:var(--saffron);font-size:0.78rem;font-weight:600;cursor:pointer;text-decoration:none;}
+.featured-card{background:var(--card);border-radius:16px;overflow:hidden;border:1px solid var(--border);margin-bottom:1rem;cursor:pointer;box-shadow:0 2px 12px var(--shadow);transition:transform 0.25s ease,box-shadow 0.25s ease,border-color 0.25s ease;}
+.featured-card:hover{transform:translateY(-3px);box-shadow:0 12px 40px var(--shadow);border-color:var(--saffron);}
+.featured-card:active{transform:scale(0.99);}
+.card-img-wrap{width:100%;height:165px;position:relative;overflow:hidden;background:linear-gradient(135deg,var(--navy),var(--navy2));display:flex;align-items:center;justify-content:center;}
+.card-img-wrap img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;}
+.card-emoji{font-size:3.2rem;position:relative;z-index:1;filter:drop-shadow(0 4px 12px rgba(0,0,0,0.4));}
+.card-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(44,26,14,0.55),transparent);z-index:2;}
+.card-body{padding:1rem;}
+.card-meta{display:flex;align-items:center;gap:0.5rem;margin-bottom:0.5rem;flex-wrap:wrap;}
+.card-category{font-size:0.65rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--saffron);}
+.card-dot{color:var(--border);}
+.card-org{font-size:0.7rem;color:var(--gray);font-weight:500;}
+.badge{font-size:0.62rem;font-weight:700;padding:0.18rem 0.5rem;border-radius:4px;margin-left:auto;}
+.badge-urgent{background:var(--red-light);color:var(--red);}
+.badge-closing{background:#FEE2E2;color:#DC2626;}
+.badge-new{background:var(--green-light);color:var(--green);}
+.badge-soon{background:#FFF3E0;color:#E65100;}
+.card-title{font-family:"Playfair Display",serif;font-size:1rem;font-weight:800;color:var(--text);margin-bottom:0.75rem;line-height:1.3;}
+.quick-facts{display:grid;grid-template-columns:1fr 1fr;gap:0.45rem;margin-bottom:0.85rem;}
+.fact{background:var(--gray-light);border-radius:8px;padding:0.5rem 0.7rem;}
+.fact-label{font-size:0.62rem;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:var(--gray);margin-bottom:0.12rem;}
+.fact-value{font-size:0.78rem;font-weight:600;color:var(--text);}
+.fact-value.salary{color:var(--green);}
+.fact-value.urgent{color:var(--red);}
+.countdown-strip{background:var(--red-light);border:1px solid #fca5a5;border-radius:8px;padding:0.5rem 0.8rem;display:flex;align-items:center;justify-content:space-between;margin-bottom:0.85rem;flex-wrap:wrap;gap:0.3rem;}
+.countdown-label{font-size:0.68rem;color:var(--red);font-weight:700;}
+.countdown-time{font-family:"DM Mono",monospace;font-weight:700;color:var(--red);font-size:0.85rem;}
+.card-actions{display:flex;gap:0.5rem;padding-top:0.85rem;border-top:1px solid var(--border);}
+.btn-apply{flex:1;background:var(--saffron);color:white;border:none;padding:0.62rem;border-radius:8px;font-family:"DM Sans",sans-serif;font-weight:700;font-size:0.82rem;cursor:pointer;text-align:center;text-decoration:none;display:flex;align-items:center;justify-content:center;transition:all .2s;}
+.btn-apply:hover{background:#a8360f;}
+.btn-apply:active{transform:scale(0.96);}
+.btn-save{background:var(--gray-light);border:1.5px solid var(--border);color:var(--text);padding:0.62rem 0.85rem;border-radius:8px;font-family:"DM Sans",sans-serif;font-weight:600;font-size:0.82rem;cursor:pointer;transition:all .2s;}
+.btn-save:hover{background:var(--red-light);border-color:#fca5a5;}
+.btn-save:active{transform:scale(0.93);}
+.btn-save.saved{background:var(--red-light);border-color:#ef4444;color:var(--red);}
+.btn-share{background:var(--gray-light);border:1.5px solid var(--border);color:var(--text);padding:0.62rem 0.8rem;border-radius:8px;cursor:pointer;transition:all .2s;font-size:0.85rem;}
+.btn-share:active{transform:scale(0.93);}
+.sidebar-sticky{position:sticky;top:70px;}
+.sidebar-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:1rem;}
+.sidebar-title{font-family:"Playfair Display",serif;font-size:0.92rem;font-weight:800;color:var(--text);margin-bottom:0.9rem;padding-bottom:0.55rem;border-bottom:2px solid var(--border);display:flex;align-items:center;gap:0.4rem;}
+.quick-job{display:flex;gap:0.7rem;padding:0.7rem 0;border-bottom:1px solid var(--border);cursor:pointer;transition:opacity .2s;text-decoration:none;color:inherit;}
+.quick-job:last-child{border-bottom:none;padding-bottom:0;}
+.quick-job:hover{opacity:0.72;}
+.quick-job-icon{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;background:var(--gray-light);}
+.quick-job-title{font-weight:600;font-size:0.78rem;color:var(--text);margin-bottom:0.18rem;}
+.quick-job-meta{font-size:0.66rem;color:var(--gray);}
+.quick-job-salary{font-size:0.68rem;font-weight:700;color:var(--green);margin-top:0.12rem;}
+.cal-item{display:flex;align-items:center;gap:0.7rem;padding:0.6rem 0;border-bottom:1px solid var(--border);}
+.cal-item:last-child{border-bottom:none;}
+.cal-date{width:42px;height:42px;background:var(--saffron);border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0;}
+.cal-day{color:white;font-weight:800;font-size:1rem;line-height:1;}
+.cal-month{color:rgba(255,255,255,0.75);font-size:0.55rem;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;}
+.cal-exam{font-size:0.76rem;font-weight:600;color:var(--text);}
+.cal-type{font-size:0.65rem;color:var(--gray);margin-top:0.1rem;}
+.alert-box{background:linear-gradient(135deg,var(--saffron),#a8360f);border-radius:12px;padding:1.1rem;text-align:center;color:white;}
+.alert-icon{font-size:1.5rem;display:block;margin-bottom:0.5rem;}
+.alert-title{font-weight:800;font-size:0.92rem;margin-bottom:0.25rem;}
+.alert-sub{font-size:0.72rem;opacity:0.85;margin-bottom:0.9rem;line-height:1.4;}
+.btn-whatsapp,.btn-telegram{width:100%;border:none;padding:0.6rem;border-radius:8px;font-family:"DM Sans",sans-serif;font-weight:700;font-size:0.8rem;cursor:pointer;margin-bottom:0.4rem;}
+.btn-whatsapp{background:#25D366;color:white;}
+.btn-telegram{background:#0088cc;color:white;}
+.qual-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:0.7rem;}
+.qual-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1rem;text-align:center;cursor:pointer;transition:all .2s;}
+.qual-card:hover{border-color:var(--saffron);transform:translateY(-2px);}
+.qual-icon{font-size:1.5rem;display:block;margin-bottom:0.4rem;}
+.qual-name{font-weight:700;font-size:0.82rem;color:var(--text);}
+.qual-count{font-size:0.7rem;color:var(--gray);margin-top:0.2rem;}
+.state-section{background:linear-gradient(135deg,var(--navy),#0a1f0a);padding:1.8rem 4%;}
+.state-sec-title{font-family:"Playfair Display",serif;font-size:1.2rem;font-weight:800;color:white;margin-bottom:1rem;max-width:1200px;margin-left:auto;margin-right:auto;}
+.knowledge-section{background:var(--cream2);padding:1.8rem 4%;}
+.knowledge-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem;}
+.know-card{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:all .2s;}
+.know-card:hover{transform:translateY(-3px);box-shadow:0 12px 30px var(--shadow);}
+.know-card-top{height:70px;display:flex;align-items:center;justify-content:center;font-size:2rem;}
+.know-card-top.upsc{background:linear-gradient(135deg,#1a3a5c,#0e2d4a);}
+.know-card-top.ssc{background:linear-gradient(135deg,#2C1A0E,#3D2515);}
+.know-card-top.banking{background:linear-gradient(135deg,#1a56db,#0e3a8a);}
+.know-card-top.railway{background:linear-gradient(135deg,#DC2626,#991b1b);}
+.know-card-top.defence{background:linear-gradient(135deg,#1a3a1a,#2d5a2d);}
+.know-card-top.state{background:linear-gradient(135deg,#5c2d0e,#3a1a0a);}
+.know-card-body{padding:0.9rem;}
+.know-card-title{font-family:"Playfair Display",serif;font-size:0.9rem;font-weight:800;color:var(--text);margin-bottom:0.3rem;}
+.know-card-sub{font-size:0.72rem;color:var(--gray);margin-bottom:0.6rem;}
+.know-perks{list-style:none;padding:0;margin-bottom:0.7rem;}
+.know-perks li{font-size:0.72rem;color:var(--text);padding:0.2rem 0;padding-left:1rem;position:relative;}
+.know-perks li::before{content:"✓";position:absolute;left:0;color:var(--green);font-weight:700;}
+.know-btn{background:var(--saffron);color:white;border:none;padding:0.5rem 0.8rem;border-radius:8px;font-family:"DM Sans",sans-serif;font-weight:600;font-size:0.75rem;cursor:pointer;width:100%;transition:all .2s;}
+.know-btn:hover{background:#a8360f;}
+footer{background:var(--navy);color:rgba(255,255,255,0.6);padding:2.2rem 4% 1.5rem;}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:1.8rem;max-width:1200px;margin:0 auto 1.8rem;}
+.footer-logo{font-family:"Playfair Display",serif;font-size:1.25rem;font-weight:900;color:white;margin-bottom:0.6rem;}
+.footer-logo span{color:var(--saffron);}
+.footer-desc{font-size:0.76rem;line-height:1.7;max-width:200px;}
+.footer-col h4{color:white;font-weight:700;font-size:0.78rem;margin-bottom:0.8rem;letter-spacing:0.5px;}
+.footer-col ul{list-style:none;}
+.footer-col ul li{margin-bottom:0.4rem;}
+.footer-col ul li a{color:rgba(255,255,255,0.45);text-decoration:none;font-size:0.76rem;transition:color .2s;cursor:pointer;}
+.footer-col ul li a:hover{color:var(--saffron);}
+.footer-bottom{max-width:1200px;margin:0 auto;border-top:1px solid rgba(255,255,255,0.08);padding-top:1.1rem;display:flex;justify-content:space-between;font-size:0.7rem;flex-wrap:wrap;gap:0.5rem;}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:1999;opacity:0;pointer-events:none;transition:opacity 0.3s;}
+.overlay.show{opacity:1;pointer-events:all;}
+.fav-panel{position:fixed;top:0;right:-420px;width:min(400px,100vw);height:100vh;background:var(--card);border-left:1px solid var(--border);z-index:2000;transition:right 0.35s cubic-bezier(0.4,0,0.2,1);overflow-y:auto;box-shadow:-10px 0 40px rgba(0,0,0,0.2);}
+.fav-panel.open{right:0;}
+.fav-panel-header{padding:1rem 1.3rem;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;background:var(--card);z-index:1;}
+.fav-panel-title{font-family:"Playfair Display",serif;font-weight:800;font-size:1rem;color:var(--text);}
+.fav-close{background:var(--gray-light);border:none;width:30px;height:30px;border-radius:8px;cursor:pointer;font-size:0.95rem;}
+.fav-list{padding:0.9rem 1.3rem;}
+.fav-item{background:var(--gray-light);border-radius:10px;padding:0.85rem;margin-bottom:0.65rem;position:relative;}
+.fav-item-title{font-weight:700;font-size:0.83rem;color:var(--text);margin-bottom:0.18rem;}
+.fav-item-org{font-size:0.7rem;color:var(--gray);margin-bottom:0.3rem;}
+.fav-item-salary{font-weight:700;color:var(--green);font-size:0.78rem;}
+.fav-remove{position:absolute;top:0.7rem;right:0.7rem;background:none;border:none;cursor:pointer;color:var(--gray);font-size:1rem;}
+.fav-remove:hover{color:var(--red);}
+.fav-empty{text-align:center;padding:2.5rem 1rem;color:var(--gray);}
+.toast{position:fixed;bottom:5rem;left:50%;transform:translateX(-50%) translateY(80px);background:var(--navy);color:white;padding:0.6rem 1.2rem;border-radius:8px;font-size:0.78rem;font-weight:500;z-index:3000;transition:transform 0.3s;pointer-events:none;white-space:nowrap;}
+.toast.show{transform:translateX(-50%) translateY(0);}
+.wa-float{position:fixed;bottom:1.4rem;right:1.4rem;background:#1ea952;color:white;width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.2rem;cursor:pointer;box-shadow:0 3px 12px rgba(30,169,82,0.28);z-index:999;transition:all .2s;}
+.wa-float:hover{background:#178a42;transform:scale(1.08);}
+.bottom-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--navy);border-top:1px solid rgba(255,255,255,0.1);z-index:998;padding:0.35rem 0 0.45rem;}
+.bottom-nav-inner{display:flex;justify-content:space-around;}
+.bnav-item{display:flex;flex-direction:column;align-items:center;gap:0.12rem;cursor:pointer;padding:0.28rem 0.7rem;border-radius:8px;border:none;background:none;transition:all .18s;}
+.bnav-icon{font-size:1.15rem;}
+.bnav-label{font-size:0.55rem;font-weight:600;color:rgba(255,255,255,0.45);letter-spacing:0.3px;}
+.bnav-item.active .bnav-icon{filter:drop-shadow(0 0 4px var(--saffron));}
+.bnav-item.active .bnav-label{color:var(--saffron);}
+.bnav-item:active{transform:scale(0.88);}
+@media(max-width:900px){
+  .main-wrap{grid-template-columns:1fr;padding:1.1rem 4%;}
+  .sidebar{display:none;}
+  .nav-center,.nav-right{display:none;}
+  .hamburger{display:flex;}
+  .nav-right-mobile{display:flex;}
+  .footer-grid{grid-template-columns:1fr 1fr;}
+  .cat-grid{grid-template-columns:repeat(4,1fr);}
+  .bottom-nav{display:block;}
+  body{padding-bottom:62px;}
+  .wa-float{bottom:5rem;}
+}
+@media(max-width:480px){
+  .footer-grid{grid-template-columns:1fr;}
+  .search-wrap select{display:none;}
+  .cat-grid{grid-template-columns:repeat(4,1fr);}
+  .hero-chip{font-size:0.66rem;padding:0.25rem 0.6rem;}
+}
+</style>`;
+}
+
+function buildNavbar(){
+  return `<nav class="navbar">
+  <div class="logo">Hire<span>India</span></div>
+  <div class="nav-center">
+    <a class="nav-link" onclick="goTo('jobs-section')">Govt Jobs</a>
+    <a class="nav-link" onclick="goTo('jobs-section')">Private Jobs</a>
+    <a class="nav-link" onclick="goTo('state-section')">By State</a>
+    <a class="nav-link" onclick="goTo('knowledge-section')">Knowledge</a>
+    <a class="nav-link" onclick="goTo('qual-section')">By Qualification</a>
+  </div>
+  <div class="nav-right">
+    <button class="dark-btn" onclick="toggleDark()">🌙</button>
+    <button class="fav-nav-btn" onclick="toggleFavPanel()">❤️ Saved (<span id="fav-count">0</span>)</button>
+    <button class="post-btn" onclick="toast('Company posting coming soon! 🚀')">Post a Job</button>
+  </div>
+  <div class="nav-right-mobile">
+    <button class="dark-btn" onclick="toggleDark()">🌙</button>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a onclick="goTo('jobs-section');closeMenu()">🏛️ Govt Jobs</a>
+  <a onclick="goTo('jobs-section');closeMenu()">💼 Private Jobs</a>
+  <a onclick="goTo('state-section');closeMenu()">🗺️ By State</a>
+  <a onclick="goTo('knowledge-section');closeMenu()">📚 Knowledge</a>
+  <a onclick="goTo('qual-section');closeMenu()">🎓 By Qualification</a>
+  <div class="mobile-menu-actions">
+    <button class="mob-fav-btn" onclick="toggleFavPanel();closeMenu()">❤️ Saved (<span id="fav-count-mob">0</span>)</button>
+    <button class="mob-post-btn" onclick="toast('Coming soon! 🚀');closeMenu()">Post a Job</button>
+  </div>
+</div>`;
+}
+
+function buildTicker(items){
+  const doubled = [...items, ...items].map(t=>`<span>${t}</span>`).join("");
+  return `<div class="ticker-bar"><div class="ticker-inner"><div class="ticker-label">🔴 LIVE</div><div class="ticker-scroll"><div class="ticker-text">${doubled}</div></div></div></div>`;
+}
+
+function buildHero(){
+  return `<section class="hero">
+  <div class="hero-logo">Hire<span>India</span></div>
+  <div class="hero-tagline">🇮🇳 India's Most Detailed Job Portal</div>
+  <p class="hero-sub">Every vacancy. Every cutoff. Updated daily — always free.</p>
+  <div class="search-wrap">
+    <input class="search-input" id="search-input" oninput="doSearch()" placeholder="Search job, department, or exam..." type="text"/>
+    <select id="search-cat" onchange="doSearch()">
+      <option value="all">All Categories</option>
+      <option value="central">Central Govt</option>
+      <option value="state">State Govt</option>
+      <option value="psu">PSU</option>
+      <option value="banking">Banking</option>
+      <option value="railway">Railways</option>
+      <option value="defence">Defence</option>
+    </select>
+    <button class="search-btn" onclick="doSearch()">🔍 Search</button>
+  </div>
+  <div class="hero-chips">
+    <span class="hero-chip" onclick="filterAndScroll('central')">🏛️ Central Govt</span>
+    <span class="hero-chip" onclick="filterAndScroll('state')">🗺️ State Govt</span>
+    <span class="hero-chip" onclick="filterAndScroll('psu')">⚙️ PSU</span>
+    <span class="hero-chip" onclick="filterAndScroll('banking')">🏦 Banking</span>
+    <span class="hero-chip" onclick="filterAndScroll('railway')">🚂 Railways</span>
+    <span class="hero-chip" onclick="filterAndScroll('defence')">⚔️ Defence</span>
+  </div>
+</section>`;
+}
+
+function buildCats(){
+  return `<section class="cat-section" id="cat-section">
+  <div class="cat-section-inner">
+    <div class="cat-section-title">Popular Categories</div>
+    <div class="cat-grid">
+      <div class="cat-card" onclick="filterAndScroll('railway')"><span class="cat-icon">🚂</span>Railway</div>
+      <div class="cat-card" onclick="filterAndScroll('banking')"><span class="cat-icon">🏦</span>Banking</div>
+      <div class="cat-card" onclick="filterAndScroll('central')"><span class="cat-icon">📋</span>SSC</div>
+      <div class="cat-card" onclick="filterAndScroll('defence')"><span class="cat-icon">⚔️</span>Defence</div>
+      <div class="cat-card" onclick="toast('Teaching jobs coming soon!')"><span class="cat-icon">📚</span>Teaching</div>
+      <div class="cat-card" onclick="filterAndScroll('state')"><span class="cat-icon">🗺️</span>State Govt</div>
+      <div class="cat-card" onclick="filterAndScroll('psu')"><span class="cat-icon">⚙️</span>PSU Jobs</div>
+      <div class="cat-card" onclick="filterAndScroll('engineering')"><span class="cat-icon">🔧</span>Engineering</div>
+    </div>
+  </div>
+</section>`;
+}
+
+function buildFilterBar(){
+  return `<div class="filter-bar">
+  <div class="chip active" onclick="filter('all',this)">🏠 All</div>
+  <div class="chip" onclick="filter('central',this)">🏛️ Central</div>
+  <div class="chip" onclick="filter('state',this)">🗺️ State</div>
+  <div class="chip" onclick="filter('psu',this)">⚙️ PSU</div>
+  <div class="chip" onclick="filter('banking',this)">🏦 Banking</div>
+  <div class="chip" onclick="filter('railway',this)">🚂 Railways</div>
+  <div class="chip" onclick="filter('defence',this)">⚔️ Defence</div>
+  <div class="chip" onclick="filter('urgent',this)">🔥 Urgent</div>
+  <div class="chip" onclick="filter('10th',this)">📋 10th Pass</div>
+  <div class="chip" onclick="filter('12th',this)">📋 12th Pass</div>
+  <div class="chip" onclick="filter('graduate',this)">🎓 Graduate</div>
+  <div class="chip" onclick="filter('engineering',this)">⚙️ Engineering</div>
+</div>`;
+}
+
+function buildJobCard(j){
+  const imgHtml = j.banner
+    ? `<img alt="${j.title}" loading="lazy" src="${j.banner}" onerror="this.style.display='none'"/>`
+    : "";
+  const cdHtml = j.countdown && j.lastDateRaw
+    ? `<div class="countdown-strip" id="cd-${j.id}"></div>`
+    : "";
+  const fact3Label = j.age ? "Age Limit" : "Qualification";
+  const fact3Val = j.age || j.qualification || "—";
+  const fact4Label = j.countdown ? (j.id===2?"Exam Date":"Last Date") : "Last Date";
+  const actionsHtml = j.comingSoon
+    ? `<button class="btn-apply" disabled style="opacity:0.6;cursor:not-allowed;">🔜 Details Coming Soon</button>`
+    : `<a class="btn-apply" href="${j.detailPage}">📄 View Full Details →</a>
+       <button class="btn-save" id="save-${j.id}" onclick="toggleSave(${j.id},\'${j.title}\',\'${j.org}\',\'${j.salary}\',this)">🤍 Save</button>
+       <button class="btn-share" onclick="shareJob(${j.id})">📤</button>`;
+  const comingSoonBox = j.comingSoon ? `<div style="background:var(--cream2);border:2px dashed var(--border);border-radius:10px;padding:1rem;text-align:center;margin:0.75rem 0;"><div style="font-size:1.3rem;margin-bottom:0.25rem;">📝</div><div style="font-weight:600;font-size:0.82rem;">Full Details Being Uploaded</div><div style="font-size:0.72rem;color:var(--gray);margin-top:0.2rem;">Coming very soon!</div></div>` : "";
+  const opacity = j.comingSoon ? "style='opacity:0.75;'" : "";
+  return `<div class="featured-card" data-type="${j.types}" data-id="${j.id}" ${opacity}>
+    <div class="card-img-wrap" style="background:${j.bgGradient};">
+      ${imgHtml}
+      <span class="card-emoji">${j.emoji}</span><div class="card-overlay"></div>
+    </div>
+    <div class="card-body">
+      <div class="card-meta"><span class="card-category">${j.category}</span><span class="card-dot">·</span><span class="card-org">${j.org}</span><span class="badge badge-${j.badge}">${j.badgeText}</span></div>
+      <div class="card-title">${j.title}</div>
+      ${!j.comingSoon ? `<div class="quick-facts">
+        <div class="fact"><div class="fact-label">Total Vacancies</div><div class="fact-value">${j.vacancies}</div></div>
+        <div class="fact"><div class="fact-label">Salary</div><div class="fact-value salary">${j.salary}</div></div>
+        <div class="fact"><div class="fact-label">${fact3Label}</div><div class="fact-value">${fact3Val}</div></div>
+        <div class="fact"><div class="fact-label">${fact4Label}</div><div class="fact-value urgent">${j.lastDate}</div></div>
+      </div>${cdHtml}` : comingSoonBox}
+      <div class="card-actions">${actionsHtml}</div>
+    </div>
+  </div>`;
+}
+
+function buildSidebar(d){
+  const alerts = d.sidebar_alerts.map(a=>`
+    <a class="quick-job" href="${a.link}" style="border-left:3px solid ${a.alertColor};padding-left:0.5rem;">
+      <div class="quick-job-icon">${a.emoji}</div>
+      <div><div class="quick-job-title">${a.title}</div><div class="quick-job-meta">${a.meta}</div><div class="quick-job-salary" style="color:${a.alertColor}">${a.alert}</div></div>
+    </a>`).join("");
+  const cal = d.calendar.map(c=>`
+    <div class="cal-item"><div class="cal-date"><span class="cal-day">${c.day}</span><span class="cal-month">${c.month}</span></div>
+    <div><div class="cal-exam">${c.exam}</div><div class="cal-type">${c.type}</div></div></div>`).join("");
+  return `<div class="sidebar"><div class="sidebar-sticky">
+    <div class="sidebar-card"><div class="sidebar-title">⚡ Breaking Alerts</div>${alerts}</div>
+    <div class="sidebar-card"><div class="sidebar-title">📅 Exam Calendar 2026</div>${cal}
+      <div style="padding:0.65rem;font-size:0.7rem;color:var(--gray);text-align:center;border-top:1px solid var(--border);margin-top:0.4rem;">More dates being added daily 🔜</div>
+    </div>
+    <div class="alert-box"><span class="alert-icon">🔔</span><div class="alert-title">Never Miss a Job Alert!</div><div class="alert-sub">Join 2.4 lakh+ students getting instant notifications</div>
+      <button class="btn-whatsapp" onclick="toast('WhatsApp channel coming soon! 📲')">📲 Join WhatsApp Channel</button>
+      <button class="btn-telegram" onclick="toast('Telegram channel coming soon! ✈️')">✈️ Join Telegram Channel</button>
+    </div>
+  </div></div>`;
+}
+
+function buildMain(d){
+  const activeJobs = d.jobs.filter(j=>!j.comingSoon).length;
+  const cards = d.jobs.map(buildJobCard).join("");
+  return `<div class="main-wrap"><div id="jobs-section">
+    <div class="sec-head"><div class="sec-title">Latest Job Alerts</div><span style="font-size:0.74rem;color:var(--gray);">${activeJobs} Active Jobs</span></div>
+    ${cards}
+    <div id="no-results-msg" style="display:none;text-align:center;padding:2rem;color:var(--gray);font-size:0.88rem;">🔍 No jobs found. Try: engineering, defence, banking</div>
+  </div>${buildSidebar(d)}</div>`;
+}
+
+function buildQualSection(){
+  return `<div id="qual-section" style="padding:1.6rem 4%;background:var(--cream2);">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div class="sec-head"><div class="sec-title">Jobs by Qualification</div></div>
+    <div class="qual-grid">
+      <div class="qual-card"><span class="qual-icon">📋</span><div class="qual-name">10th Pass</div><div class="qual-count">Uploading soon</div></div>
+      <div class="qual-card"><span class="qual-icon">📚</span><div class="qual-name">12th Pass</div><div class="qual-count">Uploading soon</div></div>
+      <div class="qual-card"><span class="qual-icon">🎓</span><div class="qual-name">Graduate</div><div class="qual-count">Uploading soon</div></div>
+      <div class="qual-card"><span class="qual-icon">⚙️</span><div class="qual-name">Engineering</div><div class="qual-count">1 live job ✅</div></div>
+      <div class="qual-card"><span class="qual-icon">🏥</span><div class="qual-name">Medical</div><div class="qual-count">Coming soon 🔜</div></div>
+      <div class="qual-card"><span class="qual-icon">⚖️</span><div class="qual-name">Law / LLB</div><div class="qual-count">Coming soon 🔜</div></div>
+      <div class="qual-card"><span class="qual-icon">🔧</span><div class="qual-name">ITI / Diploma</div><div class="qual-count">Coming soon 🔜</div></div>
+      <div class="qual-card"><span class="qual-icon">🔬</span><div class="qual-name">Post Graduate</div><div class="qual-count">Coming soon 🔜</div></div>
+    </div>
+  </div></div>`;
+}
+
+function buildStateSection(){
+  return `<div class="state-section" id="state-section">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div class="state-sec-title">🗺️ Jobs by State</div>
+    <div style="text-align:center;padding:2.2rem 1rem;background:rgba(255,255,255,0.05);border-radius:16px;border:2px dashed rgba(255,255,255,0.2);">
+      <div style="font-size:2.3rem;margin-bottom:0.7rem;">🏗️</div>
+      <div style="font-size:1.15rem;font-weight:700;color:#fff;margin-bottom:0.4rem;">State-wise Jobs — Coming Soon!</div>
+      <div style="font-size:0.82rem;color:rgba(255,255,255,0.6);max-width:360px;margin:0 auto;line-height:1.6;">We are actively uploading state-wise job listings. New jobs added daily!</div>
+      <div style="margin-top:1.1rem;display:flex;flex-wrap:wrap;justify-content:center;gap:0.4rem;">
+        <span style="background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.7);padding:0.22rem 0.65rem;border-radius:20px;font-size:0.72rem;">Maharashtra 🔜</span>
+        <span style="background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.7);padding:0.22rem 0.65rem;border-radius:20px;font-size:0.72rem;">Delhi 🔜</span>
+        <span style="background:rgba(200,68,28,0.3);color:#fff;padding:0.22rem 0.65rem;border-radius:20px;font-size:0.72rem;">Gujarat ✅ Live</span>
+        <span style="background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.7);padding:0.22rem 0.65rem;border-radius:20px;font-size:0.72rem;">Karnataka 🔜</span>
+        <span style="background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.7);padding:0.22rem 0.65rem;border-radius:20px;font-size:0.72rem;">+ 24 more 🔜</span>
+      </div>
+    </div>
+  </div></div>`;
+}
+
+function buildKnowledge(){
+  return `<div class="knowledge-section" id="knowledge-section">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div class="sec-head" style="margin-bottom:1.1rem;"><div class="sec-title">Knowledge Center</div><a class="see-all">View All →</a></div>
+    <div class="knowledge-grid">
+      <div class="know-card"><div class="know-card-top upsc">🏛️</div><div class="know-card-body"><div class="know-card-title">UPSC Civil Services (IAS/IPS)</div><div class="know-card-sub">India's most prestigious exam.</div><ul class="know-perks"><li>Starting salary ₹56,100 + allowances</li><li>Government bungalow &amp; official car</li><li>Lifetime pension after retirement</li></ul><button class="know-btn" onclick="toast('UPSC guide coming soon!')">📖 Full Study Guide →</button></div></div>
+      <div class="know-card"><div class="know-card-top ssc">📋</div><div class="know-card-body"><div class="know-card-title">SSC CGL (Staff Selection)</div><div class="know-card-sub">Most popular central govt exam for graduates.</div><ul class="know-perks"><li>Salary ₹25,500 – ₹1,12,400/month</li><li>Central govt job security for life</li><li>Medical benefits for entire family</li></ul><button class="know-btn" onclick="toast('SSC guide coming soon!')">📖 Full Study Guide →</button></div></div>
+      <div class="know-card"><div class="know-card-top banking">🏦</div><div class="know-card-body"><div class="know-card-title">IBPS / SBI Banking Exams</div><div class="know-card-sub">PO, Clerk, SO roles in public banks.</div><ul class="know-perks"><li>Salary ₹23,700 – ₹63,840/month</li><li>Home loan at extremely low interest</li><li>Saturday-Sunday holidays!</li></ul><button class="know-btn" onclick="toast('Banking guide coming soon!')">📖 Full Study Guide →</button></div></div>
+      <div class="know-card"><div class="know-card-top railway">🚂</div><div class="know-card-body"><div class="know-card-title">Railway RRB Exams</div><div class="know-card-sub">India's largest employer.</div><ul class="know-perks"><li>Salary ₹18,000 – ₹1,12,400/month</li><li>Free railway travel passes (family)</li><li>Zero layoff policy</li></ul><button class="know-btn" onclick="toast('Railway guide coming soon!')">📖 Full Study Guide →</button></div></div>
+      <div class="know-card"><div class="know-card-top defence">⚔️</div><div class="know-card-body"><div class="know-card-title">Defence Exams (NDA/CDS/AFCAT)</div><div class="know-card-sub">Army, Navy, Air Force officer roles.</div><ul class="know-perks"><li>Salary ₹56,100 – ₹2,50,000/month</li><li>Free accommodation always</li><li>Pension + disability benefits</li></ul><button class="know-btn" onclick="toast('Defence guide coming soon!')">📖 Full Study Guide →</button></div></div>
+      <div class="know-card"><div class="know-card-top state">🗺️</div><div class="know-card-body"><div class="know-card-title">State PSC Exams (MPSC/RPSC)</div><div class="know-card-sub">State officer roles in your home state.</div><ul class="know-perks"><li>Salary ₹44,900 – ₹1,42,400/month</li><li>Posting in your home state</li><li>Pension after service</li></ul><button class="know-btn" onclick="toast('State PSC guide coming soon!')">📖 Full Study Guide →</button></div></div>
+    </div>
+  </div></div>`;
+}
+
+function buildFooter(){
+  return `<footer>
+  <div class="footer-grid">
+    <div><div class="footer-logo">Hire<span>India</span></div><p class="footer-desc">India's most detailed job discovery platform. Every vacancy, every category, every cutoff. Updated daily.</p></div>
+    <div class="footer-col"><h4>QUICK LINKS</h4><ul><li><a onclick="goTo('jobs-section')">Latest Jobs</a></li><li><a onclick="toast('Results coming soon!')">Exam Results</a></li><li><a onclick="toast('Admit cards coming soon!')">Admit Cards</a></li><li><a onclick="toast('Syllabus coming soon!')">Exam Syllabus</a></li></ul></div>
+    <div class="footer-col"><h4>TOP EXAMS</h4><ul><li><a onclick="goTo('knowledge-section')">UPSC IAS</a></li><li><a onclick="goTo('knowledge-section')">SSC CGL</a></li><li><a onclick="goTo('knowledge-section')">SBI PO</a></li><li><a onclick="goTo('knowledge-section')">RRB NTPC</a></li><li><a onclick="goTo('knowledge-section')">NDA / CDS</a></li></ul></div>
+    <div class="footer-col"><h4>COMPANY</h4><ul><li><a href="contact.html">Contact Us</a></li><li><a href="privacy-policy.html">Privacy Policy</a></li><li><a href="disclaimer.html">Disclaimer</a></li><li><a href="terms.html">Terms &amp; Conditions</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><span>© 2026 HireIndia — All rights reserved 🇮🇳</span><span>Made with ❤️ for every Indian job seeker</span></div>
+  <p style="margin-top:10px;font-size:11px;opacity:0.6;max-width:1200px;margin:10px auto 0;">HireIndia is an independent platform and is not affiliated with any government organization.</p>
+</footer>`;
+}
+
+function buildBottomNav(){
+  return `<div class="bottom-nav"><div class="bottom-nav-inner">
+  <button class="bnav-item active" onclick="window.scrollTo({top:0,behavior:'smooth'})"><span class="bnav-icon">🏠</span><span class="bnav-label">Home</span></button>
+  <button class="bnav-item" onclick="goTo('jobs-section')"><span class="bnav-icon">💼</span><span class="bnav-label">Jobs</span></button>
+  <button class="bnav-item" onclick="goTo('cat-section')"><span class="bnav-icon">📋</span><span class="bnav-label">Categories</span></button>
+  <button class="bnav-item" onclick="toggleFavPanel()"><span class="bnav-icon">❤️</span><span class="bnav-label">Saved</span></button>
+  <button class="bnav-item" onclick="goTo('knowledge-section')"><span class="bnav-icon">📚</span><span class="bnav-label">Knowledge</span></button>
+</div></div>`;
+}
+
+function buildWaFloat(){
+  return `<div class="wa-float" onclick="toast('WhatsApp channel coming soon! 📲')" title="WhatsApp">📲</div>`;
+}
+
+// ─── INIT ALL JS ───
+function initAll(data){
+  // countdowns
+  data.jobs.filter(j=>j.countdown && j.lastDateRaw).forEach(j=>{
+    setCD('cd-'+j.id, j.lastDateRaw);
+  });
+  // favs
+  updateFavCount();
+  favs.forEach(f=>{
+    const b=document.getElementById('save-'+f.id);
+    if(b){b.textContent='❤️ Saved';b.classList.add('saved');}
+  });
+  renderFavs();
+  // outside click close menu
+  document.addEventListener('click',e=>{
+    const menu=document.getElementById('mobile-menu');
+    const ham=document.getElementById('hamburger');
+    if(menu && menu.classList.contains('open')&&!menu.contains(e.target)&&!ham.contains(e.target))closeMenu();
+  });
+}
+
+// ─── FAVOURITES ───
+let favs=JSON.parse(localStorage.getItem('hi-favs')||'[]');
+function toggleSave(id,title,org,salary,btn){
+  const i=favs.findIndex(f=>f.id===id);
+  if(i===-1){favs.push({id,title,org,salary});btn.textContent='❤️ Saved';btn.classList.add('saved');toast('Saved! ❤️');}
+  else{favs.splice(i,1);btn.textContent='🤍 Save';btn.classList.remove('saved');toast('Removed from saved');}
+  localStorage.setItem('hi-favs',JSON.stringify(favs));updateFavCount();renderFavs();
+}
+function renderFavs(){
+  const el=document.getElementById('fav-list');
+  if(!el)return;
+  if(!favs.length){el.innerHTML='<div class="fav-empty"><p style="font-size:1.8rem;margin-bottom:0.4rem;">🔍</p><p style="font-weight:600;font-size:0.88rem;">No saved jobs yet!</p><p style="font-size:0.76rem;margin-top:0.3rem;">Click 🤍 on any job to save it</p></div>';return;}
+  el.innerHTML=favs.map(f=>`<div class="fav-item"><div class="fav-item-title">${f.title}</div><div class="fav-item-org">${f.org}</div><div class="fav-item-salary">${f.salary}</div><button class="fav-remove" onclick="removeFav(${f.id})">✕</button></div>`).join('');
+}
+function removeFav(id){favs=favs.filter(f=>f.id!==id);localStorage.setItem('hi-favs',JSON.stringify(favs));updateFavCount();const b=document.getElementById('save-'+id);if(b){b.textContent='🤍 Save';b.classList.remove('saved');}renderFavs();toast('Removed');}
+function updateFavCount(){document.querySelectorAll('#fav-count,#fav-count-mob').forEach(e=>e.textContent=favs.length);}
+function toggleFavPanel(){document.getElementById('fav-panel').classList.toggle('open');document.getElementById('overlay').classList.toggle('show');renderFavs();}
+
+// ─── DARK MODE ───
+function toggleDark(){const dark=document.documentElement.getAttribute('data-theme')==='dark';document.documentElement.setAttribute('data-theme',dark?'light':'dark');document.querySelectorAll('.dark-btn').forEach(b=>b.textContent=dark?'🌙':'☀️');toast(dark?'☀️ Light mode':'🌙 Dark mode');}
+
+// ─── MENU ───
+function toggleMenu(){document.getElementById('hamburger').classList.toggle('open');document.getElementById('mobile-menu').classList.toggle('open');}
+function closeMenu(){document.getElementById('hamburger').classList.remove('open');document.getElementById('mobile-menu').classList.remove('open');}
+
+// ─── FILTER ───
+function filter(type,el){if(el){document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));el.classList.add('active');}document.querySelectorAll('.featured-card').forEach(c=>{const t=c.dataset.type||'';c.style.display=type==='all'||t.includes(type)?'block':'none';});}
+function filterAndScroll(type){filter(type,null);goTo('jobs-section');}
+
+// ─── SEARCH ───
+function doSearch(){const q=document.getElementById('search-input').value.toLowerCase().trim();const cat=document.getElementById('search-cat').value;let found=0;document.querySelectorAll('.featured-card').forEach(c=>{const t=c.dataset.type||'';const match=(!q||c.innerText.toLowerCase().includes(q)||t.includes(q))&&(cat==='all'||t.includes(cat));c.style.display=match?'block':'none';if(match)found++;});document.getElementById('no-results-msg').style.display=q&&found===0?'block':'none';}
+
+// ─── NAV ───
+function goTo(id){closeMenu();const el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth'});}
+
+// ─── TOAST ───
+function toast(msg){const el=document.getElementById('toast-el');el.textContent=msg;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),2500);}
+
+// ─── SHARE ───
+function shareJob(id){if(navigator.share){navigator.share({title:'HireIndia Job',url:window.location.href}).catch(()=>{});}else{toast('Link copied! 📲');}}
+
+// ─── COUNTDOWN ───
+function setCD(elId,deadline){const el=document.getElementById(elId);if(!el)return;function upd(){const d=new Date(deadline)-new Date();if(d<=0){el.innerHTML='<span class="countdown-label">⛔ Deadline Passed</span>';return;}const dy=Math.floor(d/86400000),h=Math.floor((d%86400000)/3600000),m=Math.floor((d%3600000)/60000);el.innerHTML=`<span class="countdown-label">⏰ Closes in:</span><span class="countdown-time">${dy}d ${h}h ${m}m</span>`;}upd();setInterval(upd,60000);}
+</script>
+</body>
+</html>

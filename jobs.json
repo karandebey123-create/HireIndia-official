@@ -1,0 +1,232 @@
+{
+  "ticker": [
+    "MCL Foreman & Technician – 500 Posts | Last Date: 28 May 2026 ⚠️",
+    "GPSC GMB Deputy Executive Engineer – 8 Posts | Last Date: 19 May 2026",
+    "Coal India MT Recruitment 2026 – 660 Vacancies | Last Date: 11 June 2026",
+    "Indian Army Agniveer Rally 2026 – Exam: 01-15 June 2026",
+    "JSSC JTGLCCE 2026 – 645 Posts | Last Date: 30 June 2026 🆕"
+  ],
+  "jobs": [
+    {
+      "id": 1,
+      "title": "Coal India Management Trainee Recruitment 2026",
+      "org": "Coal India Limited (CIL)",
+      "category": "PSU · Engineering",
+      "types": "psu engineering urgent",
+      "emoji": "⚙️",
+      "bgGradient": "linear-gradient(135deg,#2C1A0E,#3D2515)",
+      "banner": "coal-india-banner.jpg",
+      "badge": "urgent",
+      "badgeText": "🔥 Urgent",
+      "vacancies": "660 Posts",
+      "salary": "₹60,000 – ₹1,80,000/mo",
+      "age": "Max 30 Years",
+      "lastDate": "11 June 2026",
+      "lastDateRaw": "2026-06-11T18:00:00",
+      "qualification": "B.E/B.Tech",
+      "detailPage": "coal-india-mt-mining-2026.html",
+      "countdown": true,
+      "comingSoon": false
+    },
+    {
+      "id": 2,
+      "title": "Indian Army Agniveer Rally 2026",
+      "org": "Indian Army",
+      "category": "Defence · Central Govt",
+      "types": "defence central urgent",
+      "emoji": "🪖",
+      "bgGradient": "linear-gradient(135deg,#1a3a1a,#2d5a2d)",
+      "banner": "agniveer-banner.jpg",
+      "badge": "urgent",
+      "badgeText": "🔥 Urgent",
+      "vacancies": "Multiple Posts",
+      "salary": "₹21,000 – ₹28,000/mo",
+      "age": "17.5 – 21 Years",
+      "lastDate": "Exam: 01–15 June 2026",
+      "lastDateRaw": "2026-06-15T23:59:59",
+      "qualification": "10th / 12th",
+      "detailPage": "army-agniveer-2026.html",
+      "countdown": true,
+      "comingSoon": false
+    },
+    {
+      "id": 3,
+      "title": "GPSC GMB Deputy Executive Engineer Recruitment 2026",
+      "org": "Gujarat Maritime Board",
+      "category": "State Govt · Engineering",
+      "types": "state engineering graduate",
+      "emoji": "🏗️",
+      "bgGradient": "linear-gradient(135deg,#1a3a5c,#0e2d4a)",
+      "banner": "gpsc-gmb-banner.jpg",
+      "badge": "closing",
+      "badgeText": "⚠️ Closing Soon",
+      "vacancies": "8 Posts",
+      "salary": "₹53,100 – ₹1,67,800/mo",
+      "age": "Max 35 Years",
+      "lastDate": "19 May 2026",
+      "lastDateRaw": null,
+      "qualification": "B.Tech",
+      "detailPage": "gpsc-gmb-dee-2026.html",
+      "countdown": false,
+      "comingSoon": false
+    },
+    {
+      "id": 4,
+      "title": "MCL Assistant Foreman & Electrician Technician Recruitment 2026",
+      "org": "Mahanadi Coalfields Limited",
+      "category": "PSU · ITI/Diploma",
+      "types": "psu iti diploma urgent",
+      "emoji": "⛏️",
+      "bgGradient": "linear-gradient(135deg,#3a1a0a,#5c2d0e)",
+      "banner": "mcl-banner.jpg",
+      "badge": "closing",
+      "badgeText": "⚠️ Closing Soon",
+      "vacancies": "500 Posts",
+      "salary": "₹47,330/mo",
+      "age": "18 – 30 Years",
+      "lastDate": "28 May 2026",
+      "lastDateRaw": null,
+      "qualification": "ITI / Diploma",
+      "detailPage": "mcl-foreman-technician-2026.html",
+      "countdown": false,
+      "comingSoon": false
+    },
+    {
+      "id": 5,
+      "title": "JSSC JTGLCCE Recruitment 2026",
+      "org": "Jharkhand Staff Selection Commission",
+      "category": "State Govt · Graduate",
+      "types": "state graduate jharkhand",
+      "emoji": "🎓",
+      "bgGradient": "linear-gradient(135deg,#1a2a3a,#0e1f2d)",
+      "banner": "jssc-banner.jpg",
+      "badge": "new",
+      "badgeText": "🆕 New",
+      "vacancies": "645 Posts",
+      "salary": "₹29,200 – ₹1,42,400/mo",
+      "age": "18 – 35 Years",
+      "lastDate": "30 June 2026",
+      "lastDateRaw": null,
+      "qualification": "Graduation",
+      "detailPage": "jssc-jtglcce-2026.html",
+      "countdown": false,
+      "comingSoon": false
+    },
+    {
+      "id": 6,
+      "title": "SBI Probationary Officer (PO) Recruitment 2026",
+      "org": "State Bank of India",
+      "category": "Banking · Central Govt",
+      "types": "banking central graduate",
+      "emoji": "🏦",
+      "bgGradient": "linear-gradient(135deg,#1a56db,#0e3a8a)",
+      "banner": null,
+      "badge": "soon",
+      "badgeText": "🔜 Soon",
+      "vacancies": "TBA",
+      "salary": "TBA",
+      "age": "TBA",
+      "lastDate": "Coming Soon",
+      "lastDateRaw": null,
+      "qualification": "Graduate",
+      "detailPage": null,
+      "countdown": false,
+      "comingSoon": true
+    },
+    {
+      "id": 7,
+      "title": "RRB NTPC Graduate Level Recruitment 2026",
+      "org": "RRB / Indian Railways",
+      "category": "Railways · Central Govt",
+      "types": "railway central graduate",
+      "emoji": "🚂",
+      "bgGradient": "linear-gradient(135deg,#DC2626,#991b1b)",
+      "banner": null,
+      "badge": "soon",
+      "badgeText": "🔜 Soon",
+      "vacancies": "TBA",
+      "salary": "TBA",
+      "age": "TBA",
+      "lastDate": "Coming Soon",
+      "lastDateRaw": null,
+      "qualification": "Graduate / 12th",
+      "detailPage": null,
+      "countdown": false,
+      "comingSoon": true
+    }
+  ],
+  "sidebar_alerts": [
+    {
+      "emoji": "⛏️",
+      "title": "MCL Foreman & Technician 2026",
+      "meta": "ITI/Diploma • 500 Posts • Odisha",
+      "alert": "⚠️ Last Date: 28 May",
+      "alertColor": "#DC2626",
+      "link": "mcl-foreman-technician-2026.html"
+    },
+    {
+      "emoji": "🏗️",
+      "title": "GPSC GMB DEE 2026",
+      "meta": "B.Tech • 8 Posts • Gujarat",
+      "alert": "⚠️ Last Date: 19 May",
+      "alertColor": "#E65100",
+      "link": "gpsc-gmb-dee-2026.html"
+    },
+    {
+      "emoji": "⚙️",
+      "title": "Coal India MT 2026",
+      "meta": "Engineering • 660 Posts • Pan India",
+      "alert": "₹60,000 – ₹1,80,000/mo",
+      "alertColor": "#138808",
+      "link": "coal-india-mt-mining-2026.html"
+    },
+    {
+      "emoji": "🪖",
+      "title": "Army Agniveer Rally 2026",
+      "meta": "10th/12th • Pan India",
+      "alert": "₹21,000 – ₹28,000/mo",
+      "alertColor": "#138808",
+      "link": "army-agniveer-2026.html"
+    },
+    {
+      "emoji": "🎓",
+      "title": "JSSC JTGLCCE 2026",
+      "meta": "Graduate • 645 Posts • Jharkhand",
+      "alert": "₹29,200 – ₹1,42,400/mo",
+      "alertColor": "#138808",
+      "link": "jssc-jtglcce-2026.html"
+    }
+  ],
+  "calendar": [
+    {
+      "day": "19",
+      "month": "May",
+      "exam": "GPSC GMB DEE Last Date",
+      "type": "State Govt • Gujarat"
+    },
+    {
+      "day": "28",
+      "month": "May",
+      "exam": "MCL Foreman Last Date",
+      "type": "PSU • Odisha"
+    },
+    {
+      "day": "01",
+      "month": "Jun",
+      "exam": "Army Agniveer Exam",
+      "type": "Defence • Pan India"
+    },
+    {
+      "day": "11",
+      "month": "Jun",
+      "exam": "Coal India MT Last Date",
+      "type": "PSU • Pan India"
+    },
+    {
+      "day": "30",
+      "month": "Jun",
+      "exam": "JSSC JTGLCCE Last Date",
+      "type": "State Govt • Jharkhand"
+    }
+  ]
+}
