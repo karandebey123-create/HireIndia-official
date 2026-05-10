@@ -410,7 +410,7 @@ function buildJobCard(j){
   const fact4Label = j.countdown ? (j.id===2?"Exam Date":"Last Date") : "Last Date";
   const actionsHtml = j.comingSoon
     ? `<button class="btn-apply" disabled style="opacity:0.6;cursor:not-allowed;">🔜 Details Coming Soon</button>`
-    : `<a class="btn-apply" href="${j.detailPage}">📄 View Full Details →</a>
+    : `<a class="btn-apply" href="job-detail.html?id=${j.id}">📄 View Full Details →</a>
        <button class="btn-save" id="save-${j.id}" onclick="toggleSave(${j.id},\'${j.title}\',\'${j.org}\',\'${j.salary}\',this)">🤍 Save</button>
        <button class="btn-share" onclick="shareJob(${j.id})">📤</button>`;
   const comingSoonBox = j.comingSoon ? `<div style="background:var(--cream2);border:2px dashed var(--border);border-radius:10px;padding:1rem;text-align:center;margin:0.75rem 0;"><div style="font-size:1.3rem;margin-bottom:0.25rem;">📝</div><div style="font-weight:600;font-size:0.82rem;">Full Details Being Uploaded</div><div style="font-size:0.72rem;color:var(--gray);margin-top:0.2rem;">Coming very soon!</div></div>` : "";
